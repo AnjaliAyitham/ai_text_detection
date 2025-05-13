@@ -1,0 +1,93 @@
+{%extends 'admins/adminbase.html'%}
+{%block contents%}
+<style>
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: RED;
+  color: WHITE;
+}
+
+</style>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #DDBB00;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #AADDAA;
+}
+
+</style>
+<section class="content">
+    <div class="container">
+        <div class="we-do-details">
+            <div class="section-header text-center">
+                <h2>View Registered Users</h2>
+                <p>
+                <table class="table table-bordered bg-light text-dark">
+                    <thead>
+                    <tr style="color:WHITE;font-weight:bold;">
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Login ID</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Locality</th>
+                        <th>Status</th>
+                        <th>Activate</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in data %}
+                    <tr style="color: #BB2649">
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.loginid}}</td>
+                        <td>{{i.mobile}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.locality}}</td>
+                        <td>{{i.status}}</td>
+
+                        {% if i.status == 'waiting' %}
+                        <td><a class="btn-link" href="{% url 'activate_users' %}?uid={{ i.id }}" style="color:DARKBLUE">Activate</a></td>
+                    {% else %}
+                        <td>Activated / <a class="btn-link" href="{% url 'delete_users' %}?uid={{ i.id }}" style="color:DARKBLUE">Delete</a></td>
+                    {% endif %}
+                    
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{%endblock%}

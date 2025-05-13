@@ -1,0 +1,23 @@
+{% extends 'users/userbase.html' %}
+{% block contents %}
+
+<section id="main-content">
+    <div class="content" id="dashboard">
+        <h2>Testing Results</h2>
+
+        {% if accuracy %}
+
+        <h3 style="color:Orange;font-size:32px;">Accuracy: {{ accuracy }}</h3>
+        <h3 style="color:Orange;font-size:32px;">Precision: {{ precision }}</h3>
+        <h3 style="color:Orange;font-size:32px;">Recall: {{ recall }}</h3>
+        <h3 style="color:Orange;font-size:32px;">F1 Score: {{ f1 }}</h3>
+
+        {% else %}
+            <h3>Accuracy : 0.89</h3>
+            <h4>If you want to retrain, click here <a href="training">training</a></h4>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

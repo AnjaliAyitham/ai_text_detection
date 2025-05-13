@@ -1,0 +1,59 @@
+{% extends 'users/userbase.html' %}
+
+{% block contents %}
+<div class="content">
+    <h2>AI Text Detection</h2>
+    <p>Enter text below to check if it is AI-generated or human-written:</p>
+    
+    <form method="POST" action="{% url 'prediction' %}">
+        {% csrf_token %}
+        <textarea name="user_input" rows="5" cols="50" placeholder="Enter your text here..." required></textarea>
+        <br><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <div class="prediction-result">
+        <h3>Prediction Result:</h3>
+        <p><strong>Text:</strong> {{ user_input }}</p>
+        <p><strong>Prediction:</strong> {{ prediction }}</p>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .content {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        text-align: center;
+    }
+    textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .prediction-result {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        text-align: left;
+    }
+</style>
+{% endblock %}
